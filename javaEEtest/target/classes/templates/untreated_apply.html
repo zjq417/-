@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table
+        {
+            width:100%;
+        }
+        th
+        {
+            height:50px;
+            background-color:green;
+            color:white;
+        }
+
+        td
+        {
+            text-align:right;
+            height:50px;
+            vertical-align:bottom;
+            padding:15px;
+        }
+        table,th, td
+        {
+            border: 2px solid green;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <table width="900" height="50" border="1">
+        <tr>
+            <th width="50" scope="col">序号</th>
+            <th width="100" scope="col">编号</th>
+            <th width="100" scope="col">姓名</th>
+            <th width="100" scope="col">学号</th>
+            <th width="100" scope="col">班级</th>
+            <th width="100" scope="col">时间</th>
+            <th width="150" scope="col">原因</th>
+            <th width="100" scope="col">课程</th>
+            <th width="100" scope="col">教师</th>
+            <th width="100" scope="col">状态</th>
+            <th width="150" scope="col">操作</th>
+        </tr>
+        <div th:each="apply, itemStat : ${apply_list} ">
+            <tr>
+                <td th:text="${itemStat.index + 1}"></td>
+                <td th:text="${apply.no}"></td>
+                <td th:text="${apply.name}"></td>
+                <td th:text="${apply.sno}"></td>
+                <td th:text="${apply.classno}"></td>
+                <td th:text="${apply.date}"></td>
+                <td th:text="${apply.reason}"></td>
+                <td th:text="${apply.course}"></td>
+                <td th:text="${apply.teacher}"></td>
+                <td th:text="${apply.right}"></td>
+                <td> <a th:href="@{'manage_apply?status=1&no='+${apply.no}}"
+                        th:text="同意"></a>
+                    <a th:href="@{'manage_apply?status=0&no='+${apply.no}}"
+                       th:text="拒绝"></a>
+                </td>
+            </tr>
+        </div>
+    </table>
+</div>
+<div th:text="共+${pages} + 页"></div>
+<div th:if="${page_number} > 1" >
+    <a th:href="@{/show_apply(
+            page_size=5,
+            page_number=(${page_number} - 1),
+            field=${field},
+            condition=${condition})}"> 上一页</a></div>
+<div th:if="${page_number} < ${pages} ">
+    <a th:href="@{/show_apply(
+        page_size=5,
+        page_number=(${page_number} + 1),
+        field=${field},
+        condition=${condition})}">下一页</a></div>
+</body>
+</html>

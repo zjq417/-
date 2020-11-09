@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {width:100%;}
+        th {height:50px;background-color:green;color:white;}
+        td {text-align:right;height:50px;vertical-align:bottom;padding:15px;}
+        table,th, td {border: 2px solid green;}
+        input {
+            width: 100%;
+            height: 42px;
+            padding-left: 10px;
+        }
+        /*button {
+
+        }*/
+        .bar form {
+            height: 42px;
+            position: relative;
+            width: 300px;
+            margin: 0 auto;
+        }
+        .bar input {
+            width: 250px;
+            border-radius: 42px;
+            border: 2px solid #324B4E;
+            background: #F9F0DA;
+            transition: .3s linear;
+            float: right;
+            border: none;
+            outline: none;
+        }
+        .bar input:focus {
+            width: 300px;
+        }
+        .bar button {
+            background: none;
+            top: 40px;
+            right: 20px;
+            height: 42px;
+            width: 42px;
+            cursor: pointer;
+            position: absolute;
+            border: none;
+            outline: none;
+        }
+        .bar button:before {
+            content: "Search";
+            font-family: FontAwesome;
+            color: #324b4e;
+        }
+        select{
+            border: none;
+        //清除select聚焦时候的边框颜色
+        outline: none;
+        //将select的宽高等于div的宽高
+        width: 100%;
+            height: 40px;
+            line-height: 40px;
+        //隐藏select的下拉图标
+        appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        //通过padding-left的值让文字居中
+        padding-left: 60px;}
+    </style>
+</head>
+<body>
+<div class="bar">
+    <form method="get" action="/show_apply">
+        <!--<input name="page_size" value="1" hidden="true"/> -->
+        <text style="margin-left: 0px">查找字段：</text>
+        <select name="field">
+            <option value="default">默认无</option>
+            <option value="Atime">日期</option>
+            <option value="Ano">编号</option>
+            <option value="Aright">状态</option>
+        </select>
+        <!--查找条件：<input type="text" name="condition"/>
+        <input type="submit" value="查询"/>-->
+        <input type="text" placeholder="查找条件" name="condition">
+        <button type="submit"></button>
+    </form>
+</div>
+<div>
+    <table class="table-a">
+        <tr>
+            <th width="50" scope="col">序号</th>
+            <th width="100" scope="col">编号</th>
+            <th width="100" scope="col">姓名</th>
+            <th width="100" scope="col">学号</th>
+            <th width="100" scope="col">班级</th>
+            <th width="100" scope="col">时间</th>
+            <th width="150" scope="col">原因</th>
+            <th width="100" scope="col">课程</th>
+            <th width="100" scope="col">教师</th>
+            <th width="100" scope="col">辅导员</th>
+            <th width="100" scope="col">状态</th>
+            <th width="150" scope="col">操作</th>
+        </tr>
+        <div th:each="apply, itemStat : ${apply_list} ">
+            <tr>
+                <td th:text="${itemStat.index + 1}"></td>
+                <td th:text="${apply.no}"></td>
+                <td th:text="${apply.name}"></td>
+                <td th:text="${apply.sno}"></td>
+                <td th:text="${apply.classno}"></td>
+                <td th:text="${apply.date}"></td>
+                <td th:text="${apply.reason}"></td>
+                <td th:text="${apply.course}"></td>
+                <td th:text="${apply.teacher}"></td>
+                <td th:text="${apply.instructor}"></td>
+                <td th:text="${apply.right}"></td>
+                <td> <a th:href="@{'show_apply_edit?no=' + ${apply.no}}"
+                        th:text="修改">
+                </a>
+                    <a th:href="@{'show_apply_delete?no=' + ${apply.no}}"
+                       th:text="删除"></a>
+                </td>
+            </tr>
+        </div>
+    </table>
+</div>
+<div th:text="共+${pages} + 页"></div>
+<div th:if="${page_number} > 1" >
+    <a th:href="@{/show_apply(
+            page_size=5,
+            page_number=(${page_number} - 1),
+            field=${field},
+            condition=${condition})}"> 上一页</a></div>
+<div th:if="${page_number} < ${pages} ">
+    <a th:href="@{/show_apply(
+        page_size=5,
+        page_number=(${page_number} + 1),
+        field=${field},
+        condition=${condition})}">下一页</a></div>
+<div><a href="/show_main">返回</a> </div>
+</body>
+</html>

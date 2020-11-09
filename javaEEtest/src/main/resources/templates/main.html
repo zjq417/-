@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>main</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+        }
+        /* 头部样式 */
+        .header {
+            background-color: #f1f1f1;
+            padding: 20px;
+            text-align: center;
+        }
+        /* 导航条 */
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+        /* 导航链接 */
+        .topnav a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        /* 链接 - 修改颜色 */
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        /* 创建三个不相等的列 */
+        .column {
+            float: left;
+            padding: 10px;
+        }
+        /* 左右两侧宽度 */
+        .column.side {
+            width: 25%;
+        }
+
+        /* 中间区域宽度 */
+        .column.middle {
+            width: 50%;
+        }
+        /* 列后面清除浮动 */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        /* 响应式布局 - 宽度小于600px时设置上下布局 */
+        @media screen and (max-width: 600px) {
+            .column.side, .column.middle {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <a>学生登录成功</a>
+    <h1>欢迎光临请假系统</h1>
+</div>
+
+<div class="topnav">
+    <div><a href="/insert_apply">请假申请</a> </div>
+    <div><a href="/show_apply?field=default&condition=&page_number=1&page_size=5">我的假条</a> </div>
+    <div><a href="/bin_apply?field=default&condition=&page_number=1&page_size=5">垃圾箱</a> </div>
+    <div style="float:right; text-align:right"><a href="/show_login">退出登录</a></div>
+</div>
+
+<div class="row">
+    <div class="column side">
+        <h2>左侧栏</h2>
+        <p>书山有路勤为径</p>
+    </div>
+
+    <div class="column middle">
+        <h2>主要功能</h2>
+        <p>学生提交假条，在辅导员处理之前可对其进行修改。学生可查阅提交假条的状态。学生可对假条进行删除操作，删除的假条会保留在垃圾箱中，学生可对其进行清空或者还原操作。</p>
+        <p>学生可以按时间段查询自己的请假申请，也可以按学期进行查询，也可以按请假原因（病假，事假，或者学院学生辅助工作等）查询自己的请假申请，需要在界面上下滑显示（JavaEE分页显示，以下同）。</p>
+    </div>
+
+    <div class="column side">
+        <h2>右侧栏</h2>
+        <p>学海无涯苦作舟</p>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        input[type=text], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+        }
+        input[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+        .container {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        .col-25 {
+            float: left;
+            width: 25%;
+            margin-top: 6px;
+        }
+        .col-75 {
+            float: left;
+            width: 75%;
+            margin-top: 6px;
+        }
+        /* 清除浮动 */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* 响应式布局 layout - 在屏幕宽度小于 600px 时， 设置为上下堆叠元素 */
+        @media screen and (max-width: 600px) {
+            .col-25, .col-75, input[type=submit] {
+                width: 100%;
+                margin-top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+<h2>请假单</h2>
+<p>注意填写信息完整正确：</p>
+<div class="container">
+    <form action="InsertApply" method="get">
+        <div class="row">
+            <div class="col-25">
+                <label for="name">姓名</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="name" name="name" placeholder="Name">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="sno">学号</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="sno" name="sno" placeholder="Sno">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="classno">班级号</label>
+            </div>
+            <div class="col-75">
+                <select id="classno" name="classno">
+                    <option value="18090510">18090510</option>
+                    <option value="18090610">18090610</option>
+                    <option value="18090710">18090710</option>
+                    <option value="18090810">18090810</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="date">日期</label>
+            </div>
+            <div class="col-75">
+                <input type="date" id="date" name="date" placeholder="Date">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="reason">请假原因</label>
+            </div>
+            <div class="col-75">
+                <textarea id="reason" name="reason" placeholder="Write reason.." style="height:150px"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="course">期间课程</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="course" name="course" placeholder="Course">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="teacher">任课教师</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="teacher" name="teacher" placeholder="Teacher">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="instructor">辅导员</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="instructor" name="instructor" placeholder="Instructor">
+            </div>
+        </div>
+        <div class="row">
+            <input type="submit" value="确认提交">
+        </div>
+    </form>
+</div>
+</body>
+</html>

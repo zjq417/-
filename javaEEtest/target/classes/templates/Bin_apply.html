@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table
+        {
+            width:100%;
+        }
+        th
+        {
+            height:50px;
+            background-color:green;
+            color:white;
+        }
+
+        td
+        {
+            text-align:right;
+            height:50px;
+            vertical-align:bottom;
+            padding:15px;
+        }
+        table,th, td
+        {
+            border: 2px solid green;
+        }
+    </style>
+</head>
+<body>
+<div><a href="/clear_bin">清空回收站</a> </div>
+<div>
+    <table class="table-a">
+        <tr>
+            <th width="50" scope="col">序号</th>
+            <th width="100" scope="col">编号</th>
+            <th width="100" scope="col">姓名</th>
+            <th width="100" scope="col">学号</th>
+            <th width="100" scope="col">班级</th>
+            <th width="100" scope="col">时间</th>
+            <th width="150" scope="col">原因</th>
+            <th width="100" scope="col">课程</th>
+            <th width="100" scope="col">教师</th>
+            <th width="100" scope="col">辅导员</th>
+            <th width="100" scope="col">状态</th>
+            <th width="150" scope="col">操作</th>
+        </tr>
+        <div th:each="binapply, itemStat : ${binapply_list} ">
+            <tr>
+                <td th:text="${itemStat.index + 1}"></td>
+                <td th:text="${binapply.bno}"></td>
+                <td th:text="${binapply.bname}"></td>
+                <td th:text="${binapply.bsno}"></td>
+                <td th:text="${binapply.bclass}"></td>
+                <td th:text="${binapply.btime}"></td>
+                <td th:text="${binapply.breason}"></td>
+                <td th:text="${binapply.bcourse}"></td>
+                <td th:text="${binapply.bteacher}"></td>
+                <td th:text="${binapply.binstructor}"></td>
+                <td th:text="${binapply.bright}"></td>
+                <td> <a th:href="@{'return_apply?bno=' + ${binapply.bno}}"
+                        th:text="还原"></a>
+                </td>
+            </tr>
+        </div>
+    </table>
+</div>
+<div th:text="共+${pages} + 页"></div>
+<div th:if="${page_number} > 1" >
+    <a th:href="@{/show_apply(
+            page_size=5,
+            page_number=(${page_number} - 1),
+            field=${field},
+            condition=${condition})}"> 上一页</a></div>
+<div th:if="${page_number} < ${pages} ">
+    <a th:href="@{/show_apply(
+        page_size=5,
+        page_number=(${page_number} + 1),
+        field=${field},
+        condition=${condition})}">下一页</a></div>
+<div><a href="/show_main">返回</a> </div>
+</body>
+</html>
